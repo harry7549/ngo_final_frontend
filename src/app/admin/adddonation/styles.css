@@ -1,0 +1,697 @@
+/* body content */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* header content*/
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  justify-items: center;
+}
+
+/* header left content*/
+.header .left {
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 60px;
+}
+
+.header .left img {
+  margin-left: 9px;
+}
+
+/* header mid content*/
+.header.mid {
+  text-align: center;
+  font-size: 18px;
+  color: gray;
+}
+
+.header .mid .nav li {
+  display: inline-block;
+}
+
+.header .mid .nav li a {
+  text-decoration: none;
+  color: gray;
+  padding: 10px 20px;
+}
+
+.header .mid .nav :hover .navLink {
+  color: orange;
+}
+
+.header .mid .nav .navLink.active {
+  color: orange;
+}
+
+.header .mid .nav li .navLink {
+  position: relative;
+}
+
+.header .mid .nav li .navLink::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 0;
+  border-radius: 4px;
+  height: 2px;
+  width: 100%;
+  margin: 0 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(244, 171, 0, 1) 0%,
+    rgba(245, 245, 249, 1) 89%
+  );
+  opacity: 0;
+}
+
+.header .mid .nav li .navLink:hover::after {
+  opacity: 1;
+}
+
+.header .mid .nav .nav li .navLink.active::after {
+  opacity: 1;
+}
+
+.header .mid .nav .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.header .mid .nav .dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.header .mid .nav .dropdown .dropdown-content a {
+  color: gray;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  font-size: 18px;
+}
+
+.header .mid .nav .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.header .mid .nav .fa-solid.fa-caret-.down.drop:before {
+  content: "\f077";
+  display: flex;
+  position: absolute;
+  margin-left: 3px;
+  margin-top: -1px;
+}
+
+.header .mid .nav .dropdown .dropdown-content a:hover {
+  color: #ffa64d;
+}
+
+/* header right content*/
+.header .right {
+  margin-left: 120px;
+  margin-right: 0px;
+}
+
+.header .right .ctaBtn {
+  border: 1px solid #252988;
+  background-color: white;
+  color: #252988;
+  text-align: center;
+  display: inline-block;
+  padding: 13px 22px;
+  margin-right: 11px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.header .right .ctaBtn.filled {
+  background-color: #252988;
+  color: white;
+  padding: 13px 45px;
+}
+
+/* hr row*/
+hr {
+  margin: 0;
+}
+
+/* section content body two part divide*/
+section {
+  display: flex;
+  margin-top: 50px;
+}
+
+/* loginwrapper form section1*/
+section .loginwrapper {
+  width: 50%;
+  margin-top: 8px;
+}
+section .loginwrapper .form-main {
+  border: 1px solid #a6a6a6;
+  border-radius: 20px;
+  padding-bottom: 0px;
+  width: 355px;
+  margin: auto;
+  overflow: hidden;
+  box-shadow: 1px 0px 1px 1px #9e9b9b8a;
+}
+
+section .loginwrapper .form-main .form_create {
+  padding: 10px;
+}
+
+section .loginwrapper .form-main .form_create h2 {
+  text-align: center;
+  color: #ffa64d;
+  margin-top: -11px;
+  font-size: 25px;
+  padding-bottom: 0px;
+}
+
+section .loginwrapper .form-main .form_create .container label {
+  display: block;
+  width: 100%;
+  margin-top: -8px;
+}
+section .loginwrapper .form-main .form_create .container .input-field {
+  margin-bottom: 15px;
+}
+section .loginwrapper .form-main .form_create .container input {
+  height: 50px;
+  width: 100%;
+  border: none;
+  background-color: #f2f2f2;
+  outline: none;
+  border-radius: 7px;
+  border: none;
+  padding-left: 45px;
+  font-size: 14px;
+}
+
+section .loginwrapper .form-main .form_create .container img {
+  padding: 17px 18px;
+}
+
+section .loginwrapper .form-main .form_create .container .container.filled img {
+  margin-left: 308px;
+}
+
+section .loginwrapper .form-main .form_create .container_password {
+  margin-top: -18px;
+}
+
+section .loginwrapper .form-main .form_create .container_password label a {
+  color: #0588df;
+  margin-left: 56px;
+}
+
+section .loginwrapper .form-main .form_create .ctaBtn {
+  width: 100%;
+  color: #ffffff;
+  background-color: #252988;
+  border: 1px solid #252988;
+  height: 39px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+section .loginwrapper .form-main .form_create .fa-envelope.email:before {
+  content: "\f0e0";
+  display: flex;
+  text-align: center;
+  position: absolute;
+  margin-top: 18px;
+  margin-left: 17px;
+}
+
+section .loginwrapper .form-main .form_create .fa-key.key:before {
+  content: "\f084";
+  display: flex;
+  position: absolute;
+  margin-top: 18px;
+  margin-left: 17px;
+}
+
+section .loginwrapper .form-main .form_create .fa-eye-slash.eye:before {
+  content: "\f070";
+  display: flex;
+  position: absolute;
+  margin-top: 19px;
+  right: 926px;
+}
+
+section .loginwrapper .form-main .form_create .container_password label {
+  font-size: 15px;
+}
+
+section .loginwrapper .form-main .form_create .container.filled {
+  width: 288px;
+  padding-bottom: 22px;
+}
+
+section .loginwrapper .form-main .form_create .container.filled ::placeholder {
+  opacity: 0.5;
+}
+
+span {
+  display: flex;
+  margin-top: 5px;
+}
+
+span {
+  display: flex;
+  margin-top: 5px;
+}
+
+/*section_2_information content*/
+section .informationwrapper {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+section .informationwrapper .information h1 {
+  color: #252988;
+  font-size: 36px;
+  font-family: sans-serif;
+  margin-top: 20px;
+}
+
+section .informationwrapper .information {
+  background-image: url("/images/inform.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 563px;
+  width: 100%;
+  background-position: center;
+  position: relative;
+  right: 10px;
+}
+/* footer content*/
+.footer {
+  background-color: #2d2d2d;
+  color: hsl(0, 0%, 100%);
+}
+footer .footercontainer {
+  width: 100%;
+  margin: auto;
+  max-width: 1200px;
+}
+footer .footercontainer .row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+footer .footercontainer .col {
+  width: 33.33%;
+}
+footer .footercontainer .row .col a {
+  display: inline-block;
+}
+footer .footercontainer .col p a {
+  text-decoration: none;
+  color: #ffffff;
+}
+footer .footercontainer .col i {
+  padding-right: 15px;
+}
+footer .footercontainer .col.left {
+  margin-left: -50px;
+}
+footer .footercontainer .col.mid {
+  margin-left: 123px;
+}
+footer .footercontainer .col.right {
+  margin-left: 123px;
+}
+footer .footercontainer .row h1 {
+  font-size: 21px;
+}
+footer .footercontainer .row h2 {
+  font-size: 21px;
+}
+footer .footercontainer .row h3 {
+  font-size: 21px;
+}
+hr {
+  color: #ffffff;
+}
+footer .registered {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+footer .permitted {
+  text-align: center;
+  padding-bottom: 40px;
+  margin-top: 50px;
+}
+footer .permitted strong {
+  font-weight: 700;
+  font-size: 20px;
+}
+footer .imgbox {
+  display: flex;
+  justify-content: center;
+}
+footer .imgbox img {
+  margin: 2px;
+}
+footer .Copyright {
+  text-align: center;
+  padding-bottom: 40px;
+  margin-bottom: 0;
+}
+footer .imgbox {
+  cursor: pointer;
+  transition: height 0.5s;
+  height: 65px;
+  overflow: hidden;
+}
+footer .imgbox img {
+  overflow: hidden;
+  height: 60px;
+  width: 60px;
+}
+footer .imgbox img:hover {
+  height: 64px;
+  width: 64px;
+}
+/*fund code start*/
+body {
+  margin: 0px;
+  padding: 0px;
+}
+.fundraisingwrapper {
+  width: 100%;
+  display: flex;
+}
+
+.fundraisingwrapper .view {
+  width: 20%;
+}
+.fundraisingwrapper .fundraising {
+  width: 80%;
+}
+.fundraisingwrapper .container {
+  display: flex;
+  align-items: center;
+  background-color: #c7c3c3;
+  border-radius: 10px 10px 0px 0px;
+  padding: 15px;
+  margin-right: 20px;
+}
+.fundraisingwrapper .right {
+  display: inline-block;
+  margin-left: 760px;
+}
+.fundraisingwrapper .catBtn {
+  background-color: #015190;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+.fundraisingwrapper .fa-brands.fa-facebook {
+  color: #075ae9;
+  background-color: #ffffff;
+  border: 1px;
+  padding: 2px;
+  margin-left: 4px;
+}
+.fundraisingwrapper .fa-brands.fa-twitter {
+  color: #075ae9;
+  background-color: #ffffff;
+  border: 1px;
+  padding: 2px;
+  margin-left: 4px;
+}
+.fundraisingwrapper .fa-solid.fa-link {
+  margin-right: 4px;
+  padding: 1px;
+}
+.fundraisingwrapper .fund {
+  width: 60%;
+}
+.fundraisingwrapper .col1 textarea {
+  height: 250px;
+  width: 100%;
+  display: block;
+  padding-block: 0px;
+  padding-inline: 0px;
+}
+.fundraisingwrapper .target {
+  width: 40%;
+}
+.fundraisingwrapper .fundmain {
+  width: 100%;
+  display: flex;
+}
+.fundraisingwrapper .col1 label {
+  display: block;
+}
+.fundraisingwrapper .row {
+  margin-top: 50px;
+}
+.fundraisingwrapper .save.appeal .catBtn {
+  margin-left: 561px;
+  margin-top: 10px;
+}
+.fundraisingwrapper .target {
+  margin-left: 40px;
+}
+.fundraisingwrapper .target label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 2px;
+}
+.fundraisingwrapper .target input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.fundraisingwrapper .target input {
+  width: 100%;
+  max-width: 416px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid;
+  border-radius: 4px;
+}
+.fundraisingwrapper .target .catBtn {
+  display: block;
+  background-color: #015190;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+.fundraisingwrapper .about {
+  margin-top: 19px;
+}
+.fundraisingwrapper .about input {
+  height: 100px;
+  width: 100%;
+  display: block;
+  padding-block: 0px;
+  padding-inline: 0px;
+}
+.fundraisingwrapper .about .catBtn.filled {
+  margin-top: 10px;
+  float: right;
+  margin-bottom: 10px;
+}
+.fundraisingwrapper .gallery {
+  border: 1px solid;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.fundraisingwrapper .gallery label {
+  display: block;
+  color: #015190;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+.fundraisingwrapper .gallery input {
+  margin-bottom: 40px;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+.fundraisingwrapper .about.my .catBtn.filled {
+  float: right;
+}
+.fundraisingwrapper .about.my textarea {
+  display: block;
+  width: 100%;
+}
+.fundraisingwrapper .about textarea {
+  display: block;
+  width: 100%;
+}
+/* profile */
+body {
+  margin: 0px;
+  padding: 0px;
+}
+.profilewrapper {
+  width: 100%;
+  display: flex;
+}
+.profilewrapper .view {
+  width: 20%;
+}
+.profilewrapper .profile {
+  width: 80%;
+}
+.profilewrapper .profile .row {
+  display: flex;
+}
+.profilewrapper .profile .row .col1 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .profile .row .col2 {
+  margin-left: 50px;
+}
+.profilewrapper .col2 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .col3 {
+  margin-left: 50px;
+}
+.profilewrapper .col3 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .col3 input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.profilewrapper .row {
+  display: flex;
+}
+.profilewrapper .col4 {
+  margin-top: 30px;
+}
+.profilewrapper .col4 textarea {
+  width: 300px;
+  height: 150px;
+}
+.profilewrapper .col5 {
+  margin-left: 50px;
+  margin-top: 30px;
+}
+.profilewrapper .col5 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .col6 {
+  margin-left: 50px;
+  margin-top: 30px;
+}
+.profilewrapper .col6 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .col7 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .col7 {
+  margin-top: 30px;
+}
+.profilewrapper .col8 {
+  margin-left: 50px;
+  margin-top: 30px;
+}
+.profilewrapper .col8 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .col9 {
+  margin-left: 50px;
+  margin-top: 30px;
+}
+.profilewrapper .col9 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .col10 {
+  margin-top: 30px;
+}
+.profilewrapper .col10 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .col11 {
+  margin-left: 50px;
+  margin-top: 30px;
+}
+.profilewrapper .col11 input {
+  width: 300px;
+  height: 25px;
+}
+.profilewrapper .ctaBtn {
+  background: #015190;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 30px;
+}
+.profilewrapper footer .pro {
+  background-color: #ffffff;
+  color: #2d2d2d;
+  display: flex;
+}
+
+/* fund offline */
+.fundofflinewrapper {
+  width: 100%;
+  display: flex;
+  margin: 0;
+}
+.fundofflinewrapper .view {
+  width: 20%;
+  display: flex;
+}
+.fundofflinewrapper {
+  width: 80%;
+  display: flex;
+}
+.fundofflinewrapper .profile {
+  margin-top: 2px;
+  display: flex;
+}
+.fundofflinewrapper .profile label {
+  margin-top: 20px;
+}
+.fundofflinewrapper .profile input {
+  display: block;
+}
