@@ -10,32 +10,43 @@ export default function page() {
   const cookies = new Cookies();
   const [loading, setloading] = useState(false);
   const [token, settoken] = useState(null);
+
   const [formData, setFormData] = useState({
-    fundraiserEmail: "",
-    amount: "",
-    firstName: "",
     email: "",
-    mobileNumber: "",
-    bankDetail: "",
-    donationmethod: "",
-    donationDate: "",
+    amount: 0,
+    donor_name: "",
+    // merge fname and lname
+    donor_email: "",
+    donor_phone: "",
+    payment_type: "",
+    donation_date: "",
     //
-    lastName: "",
-    address: "",
+    // lastName: "",
+    donor_address: "",
     city: "",
     state: "",
-    county: "",
+    country: "",
     pincode: "",
-    pannumber: "",
-    bankname: "",
-    Bankbranchname: "",
+    pan: "",
+    refrence_payment: "",
+    donor_bankName: "",
+    donor_bankBranch: "",
   });
+
   useEffect(() => {
     const data = cookies.get("token");
     settoken(data);
   }, [cookies]);
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "lastName") {
+      // Merge last name with donor name
+      setFormData((prevData) => ({
+        ...prevData,
+        donor_name: `${prevData.donor_name} ${value}`, // Append last name
+        [name]: value, // Update last name separately
+      }));
+    }
     setFormData({
       ...formData,
       [name]: value,
@@ -52,19 +63,19 @@ export default function page() {
     if (!formData.amount) {
       newErrors.amount = "Amount is required";
     }
-    if (!formData.firstName) {
+    if (!formData.donor_name) {
       newErrors.firstName = "First Name is required";
     }
-    if (!formData.email) {
+    if (!formData.donor_email) {
       newErrors.email = "Email is required";
     }
-    if (!formData.mobileNumber) {
+    if (!formData.donor_phone) {
       newErrors.mobileNumber = "Mobile Number is required";
     }
-    if (!formData.bankDetail) {
-      newErrors.bankDetail = "Reference Number is required";
+    if (!formData.refrence_payment) {
+      newErrors.refrence_payment = "Reference Number is required";
     }
-    if (!formData.paymentDate) {
+    if (!formData.donation_date) {
       newErrors.paymentDate = "Donation Date is required";
     }
 
@@ -81,11 +92,12 @@ export default function page() {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.post(
-        "http://localhost:3001/admin/addOfflineDonation",
-        config,
-        formData
-      );
+      const response = await axios({
+        method: "post",
+        url: `http://localhost:3001/admin/addOfflineDonation`,
+        headers: config.headers,
+        data: formData,
+      });
       if (response == 201) {
         console.log("success");
         console.log("API response:", response.data);
@@ -100,7 +112,7 @@ export default function page() {
   };
   return (
     <>
-      {console.log(token)}
+      {/* {console.log(token)} */}
       <section className="mainSection">
         <div className="rightSection">
           <div className="rightpart">
@@ -114,9 +126,9 @@ export default function page() {
                   <br />
                   <input
                     type="text"
-                    name="fundraiserEmail"
-                    id="fundraiserEmail"
-                    value={formData.fundraiserEmail}
+                    name="email"
+                    id="email"
+                    value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter your fundraiser e-mail"
                   />
@@ -129,9 +141,9 @@ export default function page() {
                   <input
                     type="number"
                     name="amount"
-                    value={formData.fundraisermobileamount}
+                    value={formData.amount}
                     onChange={handleChange}
-                    id="amount"
+                    id="donor_phone"
                     placeholder="Enter your amount"
                     required
                   />
@@ -147,10 +159,10 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      value={formData.fundraiserfirstName}
+                      value={formData.donor_name}
                       onChange={handleChange}
-                      name="firstName"
-                      id="firstName"
+                      name="donor_name"
+                      id="donor_name"
                       placeholder="Enter your first name"
                       required
                     />
@@ -161,7 +173,7 @@ export default function page() {
                     <input
                       type="text"
                       name="lastName"
-                      value={formData.fundraiserlastName}
+                      value={formData.lastName}
                       onChange={handleChange}
                       id="lastName"
                       placeholder="Enter your last name"
@@ -174,10 +186,10 @@ export default function page() {
                     <br />
                     <input
                       type="email"
-                      value={formData.fundraiseremail}
+                      value={formData.donor_email}
                       onChange={handleChange}
-                      name="email"
-                      id="email"
+                      name="donor_email"
+                      id="donor_email"
                       placeholder="Enter your e-mail"
                       required
                     />
@@ -189,10 +201,10 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      value={formData.fundraiseraddress}
+                      value={formData.donor_address}
                       onChange={handleChange}
-                      name="address"
-                      id="address"
+                      name="donor_address"
+                      id="donor_address"
                       placeholder="Enter your address"
                     />
                   </span>
@@ -202,7 +214,7 @@ export default function page() {
                     <input
                       type="text"
                       name="city"
-                      value={formData.fundraisercity}
+                      value={formData.city}
                       onChange={handleChange}
                       id="city"
                       placeholder="Enter your city"
@@ -213,7 +225,7 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      value={formData.fundraiserstate}
+                      value={formData.state}
                       onChange={handleChange}
                       name="state"
                       id="state"
@@ -227,7 +239,7 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      value={formData.fundraisercounty}
+                      value={formData.country}
                       onChange={handleChange}
                       name="country"
                       id="country"
@@ -239,7 +251,7 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      value={formData.fundraiserpincode}
+                      value={formData.pincode}
                       onChange={handleChange}
                       name="pincode"
                       id="pincode"
@@ -253,10 +265,10 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      name="mobileNumber"
-                      value={formData.fundraisermobileNumber}
+                      name="donor_phone"
+                      value={formData.donor_phone}
                       onChange={handleChange}
-                      id="mobileNumber"
+                      id="donor_phone"
                       placeholder="Enter your mobile no."
                       maxLength="10"
                       pattern="[1-9]{1}[0-9]{9}"
@@ -273,10 +285,10 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      name="PANnumber"
-                      value={formData.fundraiserpannumber}
+                      name="pan"
+                      value={formData.pan}
                       onChange={handleChange}
-                      id="PANnumber"
+                      id="pan"
                       placeholder="Enter your PAN number"
                     />
                   </span>
@@ -288,10 +300,10 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      name="offlinePayment"
-                      value={formData.fundraiserdonationmethod}
+                      name="payment_type"
+                      value={formData.payment_type}
                       onChange={handleChange}
-                      id="offlinePayment"
+                      id="payment_type"
                       placeholder="Choose your payment method"
                       required
                     />
@@ -303,10 +315,10 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      name="bankDetail"
-                      value={formData.fundraiserbankDetail}
+                      name="refrence_payment"
+                      value={formData.refrence_payment}
                       onChange={handleChange}
-                      id="bankDetail"
+                      id="refrence_payment"
                       placeholder="Enter your Reference Number"
                       required
                     />
@@ -320,9 +332,9 @@ export default function page() {
                     <br />
                     <input
                       type="date"
-                      name="paymentDate"
-                      id="paymentdate"
-                      value={formData.fundraiserdonationDate}
+                      name="donation_date"
+                      id="donation_date"
+                      value={formData.donation_date}
                       onChange={handleChange}
                       className="paymentDate"
                       placeholder="Enter your Cheque/DD/NEFT date"
@@ -336,7 +348,7 @@ export default function page() {
                       type="text"
                       name="bankName"
                       id="bankName"
-                      value={formData.fundraiserbankname}
+                      value={formData.donor_bankName}
                       onChange={handleChange}
                       placeholder="Enter your bank name"
                     />
@@ -348,7 +360,7 @@ export default function page() {
                       type="text"
                       name="branchName"
                       id="branchName"
-                      value={formData.fundraiserbankBranchName}
+                      value={formData.donor_bankBranch}
                       onChange={handleChange}
                       placeholder="Enter your branch name"
                     />
