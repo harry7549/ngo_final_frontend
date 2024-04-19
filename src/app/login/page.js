@@ -20,6 +20,7 @@ const LoginPage = () => {
   const [cookies, setCookie] = useCookies(["token"]);
 
   useEffect(() => {
+    console.log("login");
     const token = cookies.token;
     if (token) {
       handleLoginSuccess(token);

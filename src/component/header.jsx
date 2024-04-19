@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import "./module.header.css"; // Assuming this imports your custom styles
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import useAuth from "@/context/auth";
 
 export default function Header({ role, rolename }) {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -14,10 +15,13 @@ export default function Header({ role, rolename }) {
   const router = useRouter();
   const pathname = usePathname();
   // console.log(pathname);
+  // const user = useAuth(role);
   useEffect(() => {
     if (cookies.token) {
       const decodedToken = jwtDecode(cookies.token);
       setUser(decodedToken);
+    } else {
+      setUser(null);
     }
   }, [cookies.token]);
 

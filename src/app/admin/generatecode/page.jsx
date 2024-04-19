@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import useAuth from "@/context/auth";
 import Sidebar from "../../../component/sidebar";
 import { Cookies } from "react-cookie";
-
+import "./generatecode.css";
 const GeneratePage = () => {
   const cookies = new Cookies();
   const router = useRouter();
@@ -51,52 +51,92 @@ const GeneratePage = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-      }}
-    >
-      <Sidebar />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          height: "40vh",
-          width: "70vw",
-        }}
-      >
-        <h1>Generate Fundraiser</h1>
-        <form
-          style={{ padding: "10px", margin: "10px" }}
-          onSubmit={handleSubmit}
-        >
-          <label>
-            Email:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+    <section>
+      <div className="leftSection">
+        <a href="#">
+          <p>
+            <img
+              src="/images/dashboard.png"
+              alt="dashboard"
+              height="16"
+              width="16"
             />
-          </label>
-          <br />
-          <label>
-            Name:
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <br />
-          <button type="submit" disabled={loading}>
-            {loading ? "Loading..." : "Generate Token"}
-          </button>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-        </form>
+            Dashboard
+          </p>
+        </a>
+        <a href="#">
+          <p className="active">
+            <i className="fa-regular fa-address-book"></i>Credentials
+          </p>
+        </a>
+        <a href="#">
+          <p>
+            <i className="fa-solid fa-coins"></i>Fundraiser
+          </p>
+        </a>
+        <a href="#">
+          <p>
+            <i className="fa-solid fa-hand-holding-dollar"></i>Donation
+          </p>
+        </a>
       </div>
-    </div>
+      <div className="rightSection">
+        <div className="rightsubSection">
+          <h1>Generate Credentials</h1>
+          <div className="rightsectionForm">
+            <form>
+              <span>
+                <span>E-mail </span>
+                <span className="compulsory">*</span>
+                <br />
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter your e-mail"
+                />
+              </span>
+              <span>
+                <span>Name </span>
+                <span className="compulsory">*</span>
+                <br />
+                <input
+                  type="text"
+                  name="fullName"
+                  id="fullName"
+                  placeholder="Enter your full name"
+                />
+              </span>
+              <span>
+                <span>Mobile Number </span>
+                <span className="compulsory">*</span>
+                <br />
+                <input
+                  type="number"
+                  name="mobileNumber"
+                  id="mobileNumber"
+                  placeholder="Enter your mobile no."
+                  pattern="[0-9]{10}"
+                  maxLength="10"
+                />
+              </span>
+            </form>
+          </div>
+          <div className="rightsectionBtn">
+            <a href="#">
+              <button type="reset" className="cancelBtn filled">
+                Cancel
+              </button>
+            </a>
+            <a href="#">
+              <button type="submit" className="cancelBtn">
+                Generate
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

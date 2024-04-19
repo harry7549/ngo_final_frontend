@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import "./fundraisersAdmin.css";
 
 // import "./module.fundraiser.css";
 import "../../../component/module.admin.css";
@@ -19,7 +20,6 @@ export default function FundraiserPage() {
   const [header, setheader] = useState();
   useEffect(() => {
     const token = cookies.token;
-    setCookie(token);
     const headers = { Authorization: `Bearer ${token}` };
     setheader(headers);
     console.log(token);
@@ -41,31 +41,21 @@ export default function FundraiserPage() {
   }, []);
 
   return user ? (
-    <div style={{ display: "flex" }}>
+    <section>
       <Sidebar />
-      <section>
-        <div className="rightSection">
-          <h1>Fundraisers</h1>
-          {error && (
-            <p
-              style={{ color: "red", fontSize: "120%", marginBottom: "0.5em" }}
-              className="error "
-            >
-              {error}
-            </p>
-          )}
-          <table>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>URL</th>
-                <th>Status</th>
-                <th>Edit</th>
-              </tr>
-            </thead>
+      <div className="rightSection">
+        <div className="rightsubSection">
+          <h1>Fundraiser</h1>
+          <table className="adminTable">
+            <tr>
+              <th className="tableHead">Id</th>
+              <th className="tableHead">Name</th>
+              <th className="tableHead">Email</th>
+              <th className="tableHead">Phone Number</th>
+              <th className="tableHead">URL</th>
+              <th className="tableHead">Status</th>
+              <th className="tableHead">Edit</th>
+            </tr>
             <tbody>
               {fundraisers.map((fundraiser) => (
                 <tr key={fundraiser.fundraiser_id}>
@@ -119,8 +109,8 @@ export default function FundraiserPage() {
             </tbody>
           </table>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   ) : (
     "loading"
   );

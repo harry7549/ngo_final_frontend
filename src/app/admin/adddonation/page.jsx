@@ -1,222 +1,381 @@
-// "use client";
-// import { useEffect, useState } from "react";
-// import { useRouter } from "next/navigation";
-// import useAuth from "@/context/auth";
-// import Sidebar from "../../../component/sidebar";
-// import { Cookies } from "react-cookie";
-
-// const GeneratePage = () => {
-//   const cookies = new Cookies();
-//   const router = useRouter();
-//   const { user } = useAuth(["ADMIN"]);
-//   const [email, setEmail] = useState("");
-//   const [name, setName] = useState("");
-//   const [amount, setAmount] = useState("");
-//   const [donerName, setDonerName] = useState("");
-//   const [pan, setPan] = useState("");
-//   const [donerEmail, setDonerEmail] = useState("");
-//   const [donerPhone, setDonerPhone] = useState("");
-//   const [donerAddress, setDonerAddress] = useState("");
-//   const [comments, setComments] = useState("");
-//   const [token, setToken] = useState("");
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const data = cookies.get("token");
-//     setToken(data || ""); // Set token to an empty string if data is undefined
-//   }, []);
-
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError(null);
-
-//     try {
-//       const response = await fetch("http://localhost:3001/admin/generate", {
-//         method: "POST",
-//         headers: config.headers,
-//         body: JSON.stringify({
-//           email,
-//           name,
-//           amount,
-//           doner_name: donerName,
-//           pan,
-//           doner_email: donerEmail,
-//           doner_phone: donerPhone,
-//           doner_address: donerAddress,
-//           comments,
-//         }),
-//       });
-
-//       if (!response.ok) {
-//         throw new Error("Failed to generate.");
-//       }
-
-//       router.push("/success");
-//     } catch (err) {
-//       setError(err.message || "Something went wrong.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div style={{ display: "flex" }}>
-//       <Sidebar />
-//       <div
-//         style={{
-//           display: "flex",
-//           justifyContent: "center",
-//           alignItems: "center",
-//           flexDirection: "column",
-//           height: "40vh",
-//           width: "70vw",
-//         }}
-//       >
-//         <h1>Generate Fundraiser</h1>
-//         <form
-//           style={{ padding: "10px", margin: "10px" }}
-//           onSubmit={handleSubmit}
-//         >
-//           <label>
-//             Email:
-//             <input
-//               type="email"
-//               value={email}
-//               onChange={(e) => setEmail(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Name:
-//             <input
-//               type="text"
-//               value={name}
-//               onChange={(e) => setName(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Amount:
-//             <input
-//               type="text"
-//               value={amount}
-//               onChange={(e) => setAmount(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Doner Name:
-//             <input
-//               type="text"
-//               value={donerName}
-//               onChange={(e) => setDonerName(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             PAN:
-//             <input
-//               type="text"
-//               value={pan}
-//               onChange={(e) => setPan(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Doner Email:
-//             <input
-//               type="email"
-//               value={donerEmail}
-//               onChange={(e) => setDonerEmail(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Doner Phone:
-//             <input
-//               type="text"
-//               value={donerPhone}
-//               onChange={(e) => setDonerPhone(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Doner Address:
-//             <input
-//               type="text"
-//               value={donerAddress}
-//               onChange={(e) => setDonerAddress(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <label>
-//             Comments:
-//             <textarea
-//               value={comments}
-//               onChange={(e) => setComments(e.target.value)}
-//             />
-//           </label>
-//           <br />
-//           <button type="submit" disabled={loading}>
-//             {loading ? "Loading..." : "Subm"}
-//           </button>
-//           {error && <p style={{ color: "red" }}>{error}</p>}
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
 "use client";
+import Sidebar from "@/component/sidebar";
 // export default GeneratePage;
 import "./styles.css";
+import { useEffect, useState } from "react";
+import { Cookies } from "react-cookie";
+import axios from "axios";
+
 export default function page() {
+  const cookies = new Cookies();
+  const [loading, setloading] = useState(false);
+  const [token, settoken] = useState(null);
+  const [formData, setFormData] = useState({
+    fundraiserEmail: "",
+    amount: "",
+    firstName: "",
+    email: "",
+    mobileNumber: "",
+    bankDetail: "",
+    donationmethod: "",
+    donationDate: "",
+    //
+    lastName: "",
+    address: "",
+    city: "",
+    state: "",
+    county: "",
+    pincode: "",
+    pannumber: "",
+    bankname: "",
+    Bankbranchname: "",
+  });
+  useEffect(() => {
+    const data = cookies.get("token");
+    settoken(data);
+  }, [cookies]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const [errors, setErrors] = useState({});
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validation
+    const newErrors = {};
+
+    if (!formData.amount) {
+      newErrors.amount = "Amount is required";
+    }
+    if (!formData.firstName) {
+      newErrors.firstName = "First Name is required";
+    }
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    }
+    if (!formData.mobileNumber) {
+      newErrors.mobileNumber = "Mobile Number is required";
+    }
+    if (!formData.bankDetail) {
+      newErrors.bankDetail = "Reference Number is required";
+    }
+    if (!formData.paymentDate) {
+      newErrors.paymentDate = "Donation Date is required";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // API Call
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.post(
+        "http://localhost:3001/admin/addOfflineDonation",
+        config,
+        formData
+      );
+      if (response == 201) {
+        console.log("success");
+        console.log("API response:", response.data);
+      }
+      // Reset form after successful submission if needed
+
+      setErrors({});
+    } catch (error) {
+      console.error("API error:", error);
+      // Handle API error if needed
+    }
+  };
   return (
     <>
-      <section class="fundofflinewrapper">
-        <div class="view"></div>
-        <div class="detailsfund">
-          <h1> Ngo offline fund details</h1>
-          <input type="checkbox" />
-          <label for="keepdonation">
-            Keep this donation anonymous (Donor's name and details will not be
-            listed publicly.)
-          </label>
-          <div class="profile">
-            <label for="fristname">First Name*</label>
-            <input
-              type="text"
-              id="frist Name"
-              name="Enter your first Name"
-              value=""
-              placeholder="enter your first name"
-            />
-            <label for="lastname">Last Name*</label>
-            <input
-              type="text"
-              id="frist Name"
-              name="Enter your last Name"
-              value=""
-              placeholder="enter your last name"
-            />
+      {console.log(token)}
+      <section className="mainSection">
+        <div className="rightSection">
+          <div className="rightpart">
+            <h1 className="bigText">Fundraiser Information</h1>
+            <form className="mainForm">
+              <div className="fundraiserDetail">
+                <span>
+                  <span>
+                    Fundraiser E-mail <span className="compulsory">*</span>
+                  </span>
+                  <br />
+                  <input
+                    type="text"
+                    name="fundraiserEmail"
+                    id="fundraiserEmail"
+                    value={formData.fundraiserEmail}
+                    onChange={handleChange}
+                    placeholder="Enter your fundraiser e-mail"
+                  />
+                </span>
+                <span>
+                  <span>
+                    Amount <span className="compulsory">*</span>
+                  </span>
+                  <br />
+                  <input
+                    type="number"
+                    name="amount"
+                    value={formData.fundraisermobileamount}
+                    onChange={handleChange}
+                    id="amount"
+                    placeholder="Enter your amount"
+                    required
+                  />
+                </span>
+              </div>
+              <h2>Personal Information</h2>
+              <div className="personalDetail">
+                <div className="firstpersonalDetail">
+                  <span>
+                    <span>
+                      First Name <span className="compulsory">*</span>
+                    </span>
+                    <br />
+                    <input
+                      type="text"
+                      value={formData.fundraiserfirstName}
+                      onChange={handleChange}
+                      name="firstName"
+                      id="firstName"
+                      placeholder="Enter your first name"
+                      required
+                    />
+                  </span>
+                  <span>
+                    <span>Last Name</span>
+                    <br />
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.fundraiserlastName}
+                      onChange={handleChange}
+                      id="lastName"
+                      placeholder="Enter your last name"
+                    />
+                  </span>
+                  <span>
+                    <span>
+                      Email <span className="compulsory">*</span>
+                    </span>
+                    <br />
+                    <input
+                      type="email"
+                      value={formData.fundraiseremail}
+                      onChange={handleChange}
+                      name="email"
+                      id="email"
+                      placeholder="Enter your e-mail"
+                      required
+                    />
+                  </span>
+                </div>
+                <div className="secondpersonalDetail">
+                  <span>
+                    <span>Address</span>
+                    <br />
+                    <input
+                      type="text"
+                      value={formData.fundraiseraddress}
+                      onChange={handleChange}
+                      name="address"
+                      id="address"
+                      placeholder="Enter your address"
+                    />
+                  </span>
+                  <span>
+                    <span>City</span>
+                    <br />
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.fundraisercity}
+                      onChange={handleChange}
+                      id="city"
+                      placeholder="Enter your city"
+                    />
+                  </span>
+                  <span>
+                    <span>State</span>
+                    <br />
+                    <input
+                      type="text"
+                      value={formData.fundraiserstate}
+                      onChange={handleChange}
+                      name="state"
+                      id="state"
+                      placeholder="Enter your state"
+                    />
+                  </span>
+                </div>
+                <div className="thirdpersonalDetail">
+                  <span>
+                    <span>Country</span>
+                    <br />
+                    <input
+                      type="text"
+                      value={formData.fundraisercounty}
+                      onChange={handleChange}
+                      name="country"
+                      id="country"
+                      placeholder="Enter your country"
+                    />
+                  </span>
+                  <span>
+                    <span>Pincode</span>
+                    <br />
+                    <input
+                      type="text"
+                      value={formData.fundraiserpincode}
+                      onChange={handleChange}
+                      name="pincode"
+                      id="pincode"
+                      placeholder="Enter your pincode"
+                    />
+                  </span>
+                  <span>
+                    <span>
+                      Mobile Number <span className="compulsory">*</span>
+                    </span>
+                    <br />
+                    <input
+                      type="text"
+                      name="mobileNumber"
+                      value={formData.fundraisermobileNumber}
+                      onChange={handleChange}
+                      id="mobileNumber"
+                      placeholder="Enter your mobile no."
+                      maxLength="10"
+                      pattern="[1-9]{1}[0-9]{9}"
+                      required
+                    />
+                  </span>
+                </div>
+              </div>
+              <h2>Donation Information</h2>
+              <div className="donationDetail">
+                <div className="firstdonationDetail">
+                  <span>
+                    <span>PAN Number</span>
+                    <br />
+                    <input
+                      type="text"
+                      name="PANnumber"
+                      value={formData.fundraiserpannumber}
+                      onChange={handleChange}
+                      id="PANnumber"
+                      placeholder="Enter your PAN number"
+                    />
+                  </span>
+                  <span>
+                    <span>
+                      Offline Payment Method
+                      <span className="compulsory">*</span>
+                    </span>
+                    <br />
+                    <input
+                      type="text"
+                      name="offlinePayment"
+                      value={formData.fundraiserdonationmethod}
+                      onChange={handleChange}
+                      id="offlinePayment"
+                      placeholder="Choose your payment method"
+                      required
+                    />
+                  </span>
+                  <span>
+                    <span>
+                      Reference Number <span className="compulsory">*</span>
+                    </span>
+                    <br />
+                    <input
+                      type="text"
+                      name="bankDetail"
+                      value={formData.fundraiserbankDetail}
+                      onChange={handleChange}
+                      id="bankDetail"
+                      placeholder="Enter your Reference Number"
+                      required
+                    />
+                  </span>
+                </div>
+                <div className="seconddonationDetail">
+                  <span className="offlinePaymentDate">
+                    <span>
+                      Donation (Date) <span className="compulsory">*</span>
+                    </span>
+                    <br />
+                    <input
+                      type="date"
+                      name="paymentDate"
+                      id="paymentdate"
+                      value={formData.fundraiserdonationDate}
+                      onChange={handleChange}
+                      className="paymentDate"
+                      placeholder="Enter your Cheque/DD/NEFT date"
+                      required
+                    />
+                  </span>
+                  <span>
+                    <span>Bank Name</span>
+                    <br />
+                    <input
+                      type="text"
+                      name="bankName"
+                      id="bankName"
+                      value={formData.fundraiserbankname}
+                      onChange={handleChange}
+                      placeholder="Enter your bank name"
+                    />
+                  </span>
+                  <span>
+                    <span>Bank Branch Name</span>
+                    <br />
+                    <input
+                      type="text"
+                      name="branchName"
+                      id="branchName"
+                      value={formData.fundraiserbankBranchName}
+                      onChange={handleChange}
+                      placeholder="Enter your branch name"
+                    />
+                  </span>
+                </div>
+              </div>
+              <div className="formButton">
+                <button type="reset" className="fundButton donorButton">
+                  Cancel
+                </button>
+                <button type="submit" onClick={handleSubmit}>
+                  {loading ? "Loading..." : "Submit"}
+                </button>
+                {Object.keys(errors).length > 0 && (
+                  <div className="errorMessages">
+                    {Object.values(errors).map((error, index) => (
+                      <p key={index} style={{ color: "red" }}>
+                        {error}
+                      </p>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </form>
           </div>
         </div>
       </section>
-      <button
-        onClick={(e) => {
-          console.log("submit");
-        }}
-      >
-        Submit
-      </button>
     </>
   );
 }
