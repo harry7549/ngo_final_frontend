@@ -13,7 +13,7 @@ export default function page() {
 
   const [formData, setFormData] = useState({
     email: "",
-    amount: 0,
+    amount: "",
     donor_name: "",
     // merge fname and lname
     donor_email: "",
@@ -43,13 +43,14 @@ export default function page() {
       // Merge last name with donor name
       setFormData((prevData) => ({
         ...prevData,
-        donor_name: `${prevData.donor_name} ${value}`, // Append last name
+        donor_name: `${prevData.donor_name} ${value}`,
+
         [name]: value, // Update last name separately
       }));
     }
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === "amount" ? parseInt(value): value,
     });
   };
 
@@ -98,9 +99,10 @@ export default function page() {
         headers: config.headers,
         data: formData,
       });
-      if (response == 201) {
+      if (response.status == 201) {
         console.log("success");
         console.log("API response:", response.data);
+        alert("done");
       }
       // Reset form after successful submission if needed
 
