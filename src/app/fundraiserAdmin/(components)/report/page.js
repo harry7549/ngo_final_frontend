@@ -3,10 +3,9 @@ import "./report.css";
 import AsideBar, { TopHeader } from "@/component/fundraiser/sidebar";
 
 export default function page() {
-  
   return (
     <>
-      <TopHeader link="http:google.com" />
+      <TopHeader link="http//:google.com" />
       <aside>
         <AsideBar />
 

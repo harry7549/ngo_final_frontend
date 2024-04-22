@@ -1,15 +1,20 @@
 "use client";
 import { usePathname } from "next/navigation";
 import "./style.css";
+import Link from "next/link";
+
 export default function AsideBar() {
   const pathname = usePathname();
-
   return (
     <>
       <div className="leftAside">
         <div className="container">
-          <a href="dashboard">
-            <p>
+          <a href="/fundraiserAdmin/dashboard">
+            <p
+              className={`tabButton ${
+                pathname === "/fundraiserAdmin/dashboard" ? "active" : ""
+              }`}
+            >
               <img
                 src="/images/dashboard.png"
                 alt="dashboard"
@@ -20,8 +25,12 @@ export default function AsideBar() {
               Dashboard
             </p>
           </a>
-          <a href="update">
-            <p>
+          <a href="/fundraiserAdmin/update">
+            <p
+              className={`tabButton ${
+                pathname === "/fundraiserAdmin/update" ? "active" : ""
+              }`}
+            >
               <img
                 src="/images/circle.png"
                 alt="fundraiser"
@@ -32,13 +41,21 @@ export default function AsideBar() {
               Fundraiser
             </p>
           </a>
-          <a href="photo">
-            <p>
+          <a href="/fundraiserAdmin/photo">
+            <p
+              className={`tabButton ${
+                pathname === "/fundraiserAdmin/photo" ? "active" : ""
+              }`}
+            >
               <i className="fa-solid fa-image asideIcon"></i>Photos
             </p>
           </a>
           <a href="report">
-            <p className={`tabButton ${pathname === "/photo" ? "active" : ""}`}>
+            <p
+              className={`tabButton ${
+                pathname === "/fundraiserAdmin/report" ? "active" : ""
+              }`}
+            >
               <img
                 src="/images/table.png"
                 alt="Report"
@@ -57,7 +74,6 @@ export default function AsideBar() {
 export const TopHeader = ({ link }) => {
   return (
     <>
-      {" "}
       <section>
         <div className="main">
           <div className="leftSection">
@@ -83,7 +99,8 @@ export const TopHeader = ({ link }) => {
         </div>
         <div className="lowerPart">
           <p>
-            Fundraising Page Link: <a href="#">{link}</a>
+            Fundraising Page Link:
+            <a href={`http://localhost:3000/fundraiser/${link}`}>{link}</a>
           </p>
         </div>
       </section>

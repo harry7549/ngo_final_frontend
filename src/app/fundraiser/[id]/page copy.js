@@ -19,7 +19,7 @@ export default function page({ params }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/fundraiser-page/${fundraiserID}`
+          `https://allowing-shiner-needlessly.ngrok-free.app/fundraiser-page/${fundraiserID}`
         );
         setFundraiser(response.data); // Set the response data to the state
         console.log(response); // Set the response data to the state

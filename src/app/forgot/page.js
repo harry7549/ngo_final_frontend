@@ -17,7 +17,7 @@ const DefaultResetPassword = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3001/auth/forgot-password",
+        "https://allowing-shiner-needlessly.ngrok-free.app/auth/forgot-password",
         { email }
       );
       console.log(response.data);
@@ -38,7 +38,7 @@ const DefaultResetPassword = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3001/auth/reset-password",
+        "https://allowing-shiner-needlessly.ngrok-free.app/auth/reset-password",
         { otp, newPassword }
       );
       console.log(response.data);

@@ -1,10 +1,18 @@
-import Sidebar, { TopHeader } from "@/component/fundraiser/sidebar";
+"use client";
+import { TopHeader } from "@/component/fundraiser/sidebar";
 import "./dashboard.css";
 import AsideBar from "@/component/fundraiser/sidebar";
+import useAuth from "@/context/auth";
+import { useContext, useEffect, useState } from "react";
+import { FundraiserContext } from "@/context/FundraiserContext";
+
 export default function Dashboard() {
-  return (
+  const { user } = useAuth("FUNDRAISER");
+  const [token, setToken] = useState(null);
+  const fundraiserCtx = useContext(FundraiserContext);
+  return user ? (
     <>
-      <TopHeader />
+      <TopHeader link={`${fundraiserCtx.fundraiser_page?.id}`} />
       <aside>
         <AsideBar />
         <div className="rightAside">
@@ -17,19 +25,23 @@ export default function Dashboard() {
                 <p>
                   <i className="fa-solid fa-coins"></i>Total Amount Raised
                 </p>
-                <p className="amtMoney">&#8377; 4,84,100</p>
+                <p className="amtMoney">
+                  &#8377; {fundraiserCtx.total_amount_raised}
+                </p>
               </div>
               <div className="totalDonors">
                 <p>
                   <i className="fa-solid fa-hand-holding-heart"></i>No. of
                   Donors
                 </p>
-                <p className="no-donor">20</p>
+                <p className="no-donor">{fundraiserCtx.total_donations}</p>
               </div>
             </div>
           </div>
         </div>
       </aside>
     </>
+  ) : (
+    ""
   );
 }

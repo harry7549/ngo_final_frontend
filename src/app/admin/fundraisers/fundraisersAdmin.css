@@ -9,6 +9,7 @@ section {
 }
 .leftSection {
   width: 20%;
+  height: auto;
   border: 1px solid lightgray;
   padding: 24px 4px;
   display: flex;

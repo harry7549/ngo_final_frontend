@@ -7,23 +7,23 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.mainSection .rightSection {
+.mainFundraiser .rightSection {
   width: 80%;
 }
-.mainSection .rightSection .rightpart {
+.mainFundraiser .rightSection .rightpart {
   border: 1px solid #eaecf0;
   border-radius: 16px;
   margin: 6px;
 }
-.mainSection .rightSection .rightpart .bigText {
+.mainFundraiser .rightSection .rightpart .bigText {
   padding: 35px 40px 0 40px;
 }
-.mainSection .rightSection .rightpart .fundraiserDetail {
+.mainFundraiser .rightSection .rightpart .fundraiserDetail {
   display: flex;
   gap: 10px;
   padding: 16px 40px 30px 40px;
 }
-.mainSection .rightSection .rightpart .fundraiserDetail input,
+.mainFundraiser .rightSection .rightpart .fundraiserDetail input,
 .firstpersonalDetail input,
 .secondpersonalDetail input,
 .thirdpersonalDetail input,
@@ -42,13 +42,13 @@ body {
   margin-top: 6px;
   outline: none;
 }
-.mainSection .rightSection .rightpart .mainForm input::placeholder {
+.mainFundraiser .rightSection .rightpart .mainForm input::placeholder {
   color: #667085;
 }
-.mainSection .rightSection .rightpart h2 {
+.mainFundraiser .rightSection .rightpart h2 {
   padding: 0 40px 0px 40px;
 }
-.mainSection .rightSection .rightpart .firstpersonalDetail,
+.mainFundraiser .rightSection .rightpart .firstpersonalDetail,
 .secondpersonalDetail,
 .thirdpersonalDetail,
 .firstdonationDetail,
@@ -57,25 +57,27 @@ body {
   gap: 10px;
   padding: 16px 40px 30px 40px;
 }
-.mainSection .rightSection .rightpart .secondpersonalDetail,
+.mainFundraiser .rightSection .rightpart .secondpersonalDetail,
 .thirdpersonalDetail,
 .seconddonationDetail {
   padding-top: 0;
 }
-.mainSection .rightSection .rightpart .firstpersonalDetail input,
+.mainFundraiser .rightSection .rightpart .firstpersonalDetail input,
 .secondpersonalDetail input,
 .thirdpersonalDetail input,
 .firstdonationDetail input,
 .seconddonationDetail input {
   width: 300px;
 }
-.mainSection .rightSection .rightpart .formButton {
+.mainFundraiser .rightSection .rightpart .formButton {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
+  margin-top: 25px;
+  margin-bottom: 25px;
   padding: 0 16px;
 }
-.mainSection .rightSection .rightpart .formButton .fundButton {
+.mainFundraiser .rightSection .rightpart .formButton .fundButton {
   padding: 10px 20px;
   height: 45px;
   width: 95px;
@@ -86,14 +88,14 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
-.mainSection .rightSection .rightpart .formButton .fundButton.donorButton {
+.mainFundraiser .rightSection .rightpart .formButton .fundButton.donorButton {
   background-color: #fff;
   color: #505050;
 }
-.mainSection .rightSection .rightpart .mainForm input#paymentdate {
+.mainFundraiser .rightSection .rightpart .mainForm input#paymentdate {
   width: 170px;
   color: #667085;
 }
-.mainSection .rightSection .rightpart .mainForm .compulsory {
+.mainFundraiser .rightSection .rightpart .mainForm .compulsory {
   color: #ff0000;
 }

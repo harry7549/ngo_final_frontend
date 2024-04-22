@@ -1,65 +1,42 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import "../component/module.admin.css";
 import "../app/admin/fundraisers/fundraisersAdmin.css";
+import Link from "next/link";
 export default function Sidebar() {
   const pathname = usePathname();
   console.log(pathname);
   return (
     <>
       <div className="leftSection">
-        <a href="#">
-          <p>
-            <img src="../asset/dashboard.png" height="16" width="16" />
+        <Link href="/admin">
+          <p className={` ${pathname === "/admin" ? "active" : ""}`}>
+            <img src="/images/dashboardIcon.png" height="16" width="16" />
             Dashboard
           </p>
-        </a>
-        <a href="#">
-          <p>
+        </Link>
+        <Link href="/admin/generatecode">
+          <p
+            className={` ${pathname === "/admin/generatecode" ? "active" : ""}`}
+          >
             <i className="fa-regular fa-address-book"></i>Credentials
           </p>
-        </a>
-        <a href="#">
-          <p className="active">
+        </Link>
+        <Link href="/admin/fundraisers">
+          <p
+            className={` ${pathname === "/admin/fundraisers" ? "active" : ""}`}
+          >
             <i className="fa-solid fa-coins"></i>Fundraiser
           </p>
-        </a>
-        <a href="#">
-          <p>
+        </Link>
+        <Link href="/admin/adddonation">
+          <p
+            className={` ${pathname === "/admin/adddonation" ? "active" : ""}`}
+          >
             <i className="fa-solid fa-hand-holding-dollar"></i>Donation
           </p>
-        </a>
+        </Link>
       </div>
     </>
   );
-}
-{
-  /* <div class="leftSection">
-  <a href="#">
-    <p>
-      <img
-        src="../asset/dashboard.png"
-        alt="dashboard"
-        height="16"
-        width="16"
-      />
-      Dashboard
-    </p>
-  </a>
-  <a href="#">
-    <p>
-      <i class="fa-regular fa-address-book"></i>Credentials
-    </p>
-  </a>
-  <a href="#">
-    <p class="active">
-      <i class="fa-solid fa-coins"></i>Fundraiser
-    </p>
-  </a>
-  <a href="#">
-    <p>
-      <i class="fa-solid fa-hand-holding-dollar"></i>Donation
-    </p>
-  </a>
-</div>; */
 }

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { Cookies } from "react-cookie";
-
 const useAuth = (allowedRoles) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
@@ -13,7 +12,8 @@ const useAuth = (allowedRoles) => {
     const token = cookies.get("token");
 
     if (!token) {
-      router.push("/login");
+      router.replace("/login");
+      
       return;
     }
 

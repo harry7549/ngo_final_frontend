@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import "../../component/module.fundraiser.css";
-import useAuth from "@/context/auth";
-import axios from "axios";
+import Link from "next/link";
+
 export default function page() {
   const [fundraiser, setfundraiser] = useState([]);
   // const data = axios.get();
@@ -36,16 +36,16 @@ export default function page() {
             <h1 className="resolutionAbout">About My Resolution</h1>
             <p className="motivation">{fundraiser.resolution}</p>
             <div className="resolutionBtn">
-              <a href="#" className="resolutionLink">
+              <Link href="#" className="resolutionLink">
                 <button type="submit" className="mainbtn">
                   <i className="fa-solid fa-share-nodes"></i>Share
                 </button>
-              </a>
-              <a href="#" className="resolutionLink">
+              </Link>
+              <Link href="#" className="resolutionLink">
                 <button type="submit" className="mainbtn filled">
                   Contribute
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

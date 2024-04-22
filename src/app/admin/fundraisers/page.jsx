@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import "./fundraisersAdmin.css";
-
 // import "./module.fundraiser.css";
 import "../../../component/module.admin.css";
 import useAuth from "@/context/auth";
 import Sidebar from "../../../component/sidebar";
+import Link from "next/link";
 export default function FundraiserPage() {
   const [cookies, setCookie] = useCookies(["token"]);
   const [state, setstate] = useState();
@@ -27,7 +27,7 @@ export default function FundraiserPage() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/admin/fundraiser",
+          "https://allowing-shiner-needlessly.ngrok-free.app/admin/fundraiser",
           { headers }
         );
         setFundraisers(response.data);
@@ -47,15 +47,17 @@ export default function FundraiserPage() {
         <div className="rightsubSection">
           <h1>Fundraiser</h1>
           <table className="adminTable">
-            <tr>
-              <th className="tableHead">Id</th>
-              <th className="tableHead">Name</th>
-              <th className="tableHead">Email</th>
-              <th className="tableHead">Phone Number</th>
-              <th className="tableHead">URL</th>
-              <th className="tableHead">Status</th>
-              <th className="tableHead">Edit</th>
-            </tr>
+            <thead>
+              <tr>
+                <th className="tableHead">Id</th>
+                <th className="tableHead">Name</th>
+                <th className="tableHead">Email</th>
+                <th className="tableHead">Phone Number</th>
+                <th className="tableHead">URL</th>
+                <th className="tableHead">Status</th>
+                <th className="tableHead">Edit</th>
+              </tr>
+            </thead>
             <tbody>
               {fundraisers.map((fundraiser) => (
                 <tr key={fundraiser.fundraiser_id}>
@@ -64,7 +66,8 @@ export default function FundraiserPage() {
                   <td>{fundraiser.email}</td>
                   <td>{fundraiser.mobile_number}</td>
                   <td>
-                    http://localhost:3000/fundraiser/{fundraiser.fundraiser_id}
+                    http://localhost:3000/fundraiser/
+                    {fundraiser.fundraiser_page?.id}
                   </td>
                   <td>
                     <label className="switch">
@@ -87,8 +90,8 @@ export default function FundraiserPage() {
                           console.log("aa", header);
                           axios(
                             {
-                              method: "post",
-                              url: `http://localhost:3001/admin/fundraiser/status/${fundraiser.fundraiser_id}`,
+                              method: "put",
+                              url: `https://allowing-shiner-needlessly.ngrok-free.app/admin/fundraiser/status/${fundraiser.fundraiser_id}`,
                               headers: header,
                             }
                             // { status: updatedStatus }
@@ -100,9 +103,9 @@ export default function FundraiserPage() {
                     </label>
                   </td>
                   <td>
-                    <a href="#">
+                    <Link href="#">
                       <i className="fa-solid fa-pen-to-square editText"></i>
-                    </a>
+                    </Link>
                   </td>
                 </tr>
               ))}

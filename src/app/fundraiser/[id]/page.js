@@ -19,7 +19,7 @@ export default function page({ params }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/fundraiser-page/${fundraiserID}`
+          `https://allowing-shiner-needlessly.ngrok-free.app/fundraiser-page/${fundraiserID}`
         );
         setFundraiser(response.data); // Set the response data to the state
         console.log(response); // Set the response data to the state
@@ -112,6 +112,7 @@ export default function page({ params }) {
         ) : (
           //images
           <div className="leftAside">
+            {fundraiser.map()}
             <img
               style={{ height: "200px", width: "200px" }}
               src="crawler.drawiofa39749d-f4de-4770-95f5-8aa6f737b3b0.png"

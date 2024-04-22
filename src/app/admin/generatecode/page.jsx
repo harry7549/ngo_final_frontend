@@ -5,6 +5,7 @@ import useAuth from "@/context/auth";
 import Sidebar from "../../../component/sidebar";
 import { Cookies } from "react-cookie";
 import "./generatecode.css";
+import Link from "next/link";
 const GeneratePage = () => {
   const cookies = new Cookies();
   const router = useRouter();
@@ -32,11 +33,14 @@ const GeneratePage = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3001/admin/generate", {
-        method: "POST",
-        config,
-        body: JSON.stringify({ email, name }),
-      });
+      const response = await fetch(
+        "https://allowing-shiner-needlessly.ngrok-free.app/admin/generate",
+        {
+          method: "POST",
+          config,
+          body: JSON.stringify({ email, name }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to generate.");
@@ -52,34 +56,7 @@ const GeneratePage = () => {
 
   return (
     <section>
-      <div className="leftSection">
-        <a href="#">
-          <p>
-            <img
-              src="/images/dashboard.png"
-              alt="dashboard"
-              height="16"
-              width="16"
-            />
-            Dashboard
-          </p>
-        </a>
-        <a href="#">
-          <p className="active">
-            <i className="fa-regular fa-address-book"></i>Credentials
-          </p>
-        </a>
-        <a href="#">
-          <p>
-            <i className="fa-solid fa-coins"></i>Fundraiser
-          </p>
-        </a>
-        <a href="#">
-          <p>
-            <i className="fa-solid fa-hand-holding-dollar"></i>Donation
-          </p>
-        </a>
-      </div>
+      <Sidebar />
       <div className="rightSection">
         <div className="rightsubSection">
           <h1>Generate Credentials</h1>
@@ -123,16 +100,16 @@ const GeneratePage = () => {
             </form>
           </div>
           <div className="rightsectionBtn">
-            <a href="#">
+            <Link href="#">
               <button type="reset" className="cancelBtn filled">
                 Cancel
               </button>
-            </a>
-            <a href="#">
+            </Link>
+            <Link href="#">
               <button type="submit" className="cancelBtn">
                 Generate
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

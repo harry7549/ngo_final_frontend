@@ -21,7 +21,7 @@ export default function page() {
     payment_type: "",
     donation_date: "",
     //
-    // lastName: "",
+    lastName: "",
     donor_address: "",
     city: "",
     state: "",
@@ -50,7 +50,7 @@ export default function page() {
     }
     setFormData({
       ...formData,
-      [name]: name === "amount" ? parseInt(value): value,
+      [name]: name === "amount" ? parseInt(value) : value,
     });
   };
 
@@ -95,7 +95,8 @@ export default function page() {
       };
       const response = await axios({
         method: "post",
-        url: `http://localhost:3001/admin/addOfflineDonation`,
+        //processENV
+        url: `https://allowing-shiner-needlessly.ngrok-free.app/admin/addOfflineDonation`,
         headers: config.headers,
         data: formData,
       });
@@ -115,7 +116,9 @@ export default function page() {
   return (
     <>
       {/* {console.log(token)} */}
-      <section className="mainSection">
+
+      <section className="mainFundraiser">
+        <Sidebar />
         <div className="rightSection">
           <div className="rightpart">
             <h1 className="bigText">Fundraiser Information</h1>
@@ -348,7 +351,7 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      name="bankName"
+                      name="donor_bankName"
                       id="bankName"
                       value={formData.donor_bankName}
                       onChange={handleChange}
@@ -360,7 +363,7 @@ export default function page() {
                     <br />
                     <input
                       type="text"
-                      name="branchName"
+                      name="donor_bankBranch"
                       id="branchName"
                       value={formData.donor_bankBranch}
                       onChange={handleChange}
@@ -373,7 +376,11 @@ export default function page() {
                 <button type="reset" className="fundButton donorButton">
                   Cancel
                 </button>
-                <button type="submit" onClick={handleSubmit}>
+                <button
+                  className="fundButton"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
                   {loading ? "Loading..." : "Submit"}
                 </button>
                 {Object.keys(errors).length > 0 && (

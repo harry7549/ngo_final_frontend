@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 import Header from "@/component/header";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
-import Loading from "../loading";
-
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,7 +59,8 @@ const LoginPage = () => {
         },
       };
       const { data } = await axios.post(
-        "http://localhost:3001/auth/login",
+        //processENV
+        "https://allowing-shiner-needlessly.ngrok-free.app/auth/login",
         { email, password },
         config
       );
@@ -120,7 +119,7 @@ const LoginPage = () => {
     if (decodedToken.role === "ADMIN") {
       router.push("/admin");
     } else if (decodedToken.role === "FUNDRAISER") {
-      router.push("/fundraiser");
+      router.push("/fundraiserAdmin");
     } else if (decodedToken.role === "NORMAL_USER_ROLE") {
       router.push("/user");
     } else {
