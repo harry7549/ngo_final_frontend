@@ -1,10 +1,15 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AsideBar, { TopHeader } from "@/component/fundraiser/sidebar";
 import "./photo.css";
 import { FundraiserContext } from "@/context/FundraiserContext";
+import Image from "next/image";
 
 export default function page() {
+  const [fundraiser, setFundraiser] = useState({}); // Initialize
+
+
+
   const fundraiserCtx = useContext(FundraiserContext); // Assuming FundraiserContext is already imported and set up
 
   const [images, setImages] = useState([]);
@@ -25,6 +30,27 @@ export default function page() {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "true",
+          },
+        };
+        const response = await axios.get(
+          `https://allowing-shiner-needlessly.ngrok-free.app/fundraiser-page/${fundraiserID}`,
+          config
+        );
+        setFundraiser(response.data); // Set the response data to the state
+        console.log(response); // Set the response data to the state
+      } catch (error) {
+        console.error("Error fetching fundraisers:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <TopHeader link="none" />
@@ -32,43 +58,38 @@ export default function page() {
         <AsideBar />
 
         <section className="photowrapper">
-          <div className="imgwrapper">
-            <div className="imgcount">
+          <div class="imgwrapper">
+            <div class="imgcount">
               <p>
-                Photos ({fundraiserCtx.image?.length + images.length})
+                Photos (21)
                 <a href="#">
-                  <button onClick={thisFileUpload} className="ctaBtn">
-                    <input
-                      type="file"
-                      id="file"
-                      style={{ display: "none" }}
-                      multiple
-                      accept="image/*"
-                      onChange={thisFileUpload}
-                    />
-                    <i className="fa-solid fa-arrow-up-from-bracket"></i>Upload
+                  <button type="button" class="ctaBtn">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i>Upload
                     Photo
                   </button>
                 </a>
               </p>
             </div>
-            <div className="row">
-              {fundraiserCtx.image?.map((img, index) => (
-                <div className="col" key={index}>
-                  <button type="button" className="delete">
-                    <i className="fa-solid fa-trash"></i>
-                  </button>
-                  <img src={img} alt={`Image ${index}`} />
+            <div class="row">
+              {fundraiser?.gallery?.map((image, index) => (
+                <div key={index} className="galleryImage">
+                  <h1>{image}</h1>
+
+                  <Image
+                    src={`https://allowing-shiner-needlessly.ngrok-free.app/fundRaiser/fundraiser-page/${image}`}
+                    alt={`Image ${image}`}
+                    className="galleryImg"
+                    height="200"
+                    width="200"
+                  />
                 </div>
               ))}
-              {images.map((img, index) => (
-                <div className="col" key={fundraiserCtx.image.length + index}>
-                  <button type="button" className="delete">
-                    <i className="fa-solid fa-trash"></i>
-                  </button>
-                  <img src={img} alt={`Uploaded Image ${index}`} />
-                </div>
-              ))}
+              <div class="col">
+                <button type="button" class="delete">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                <img src="img\logo.png" />
+              </div>
             </div>
           </div>
         </section>

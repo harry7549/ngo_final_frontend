@@ -8,7 +8,6 @@ import { FundraiserContext } from "@/context/FundraiserContext";
 
 export default function Dashboard() {
   const { user } = useAuth("FUNDRAISER");
-  const [token, setToken] = useState(null);
   const fundraiserCtx = useContext(FundraiserContext);
   return user ? (
     <>

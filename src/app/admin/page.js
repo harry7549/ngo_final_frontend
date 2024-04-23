@@ -56,35 +56,35 @@ export default function FundraiserPage() {
               <div className="box">
                 <img src="/images/coins-hand.svg" width="58px" height="58px" />
                 <p>
-                  <span>{allData.totalDonations}/-</span>
+                  <span> &#8377; {allData.totalDonations}/-</span>
                   <span>Total Donation</span>
                 </p>
               </div>
               <div className="box secend">
                 <img src="/images/Icon.svg" />
                 <p>
-                  <span>{allData.totalFundraisers}/-</span>
+                  <span> {allData.totalFundraisers}</span>
                   <span>Total Fundraisers</span>
                 </p>
               </div>
               <div className="box">
                 <img src="/images/Icon.svg" />
                 <p>
-                  <span>{allData.activeFundraisers}/-</span>
+                  <span>{allData.activeFundraisers}</span>
                   <span>Active Fundraisers</span>
                 </p>
               </div>
               <div className="box secend">
                 <img src="/images/coins-03.svg" />
                 <p>
-                  <span>{allData.todayDonations}/-</span>
+                  <span> &#8377; {allData.todayDonations}/-</span>
                   <span>Today’s Donation</span>
                 </p>
               </div>
               <div className="box">
                 <img src="/images/coins-03.svg" />
                 <p>
-                  <span>{allData.thisMonthDonations}/-</span>
+                  <span> &#8377; {allData.thisMonthDonations}/-</span>
                   <span>Last Month Donation</span>
                 </p>
               </div>

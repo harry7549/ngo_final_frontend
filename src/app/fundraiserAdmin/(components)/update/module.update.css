@@ -93,7 +93,7 @@ aside {
 }
 .container p {
   padding: 15px 10px;
-  color: #0000ff;
+  color: #010080;
   width: 100%;
   font-weight: 700;
   cursor: pointer;
@@ -164,7 +164,7 @@ label {
   justify-content: flex-end;
 }
 .formButton {
-  background-color: #0000ff;
+  background-color: #010080;
   color: #fff;
   padding: 10px 15px;
   border: none;

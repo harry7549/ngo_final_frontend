@@ -74,7 +74,7 @@ export default function FundraiserPage() {
                   <tr key={fundraiser.fundraiser_id}>
                     <td>{fundraiser.f_id}</td>
                     <td>{fundraiser.firstName}</td>
-                    <td>{fundraiser.email}</td>
+                    <td>{fundraiser.email.toLowerCase()}</td>
                     <td>{fundraiser.mobile_number}</td>
                     <td>
                       http://localhost:3000/fundraiser/

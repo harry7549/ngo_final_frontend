@@ -8,6 +8,7 @@ import "./module.header.css"; // Assuming this imports your custom styles
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import useAuth from "@/context/auth";
+import { FundraiserContext } from "@/context/FundraiserContext";
 
 export default function Header({ role, rolename }) {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -16,6 +17,10 @@ export default function Header({ role, rolename }) {
   const pathname = usePathname();
   // console.log(pathname);
   // const user = useAuth(role);
+  const [isopen, setisopen] = useState(false);
+  const toggle = () => {
+    setisopen(!isopen);
+  };
   useEffect(() => {
     if (cookies.token) {
       const decodedToken = jwtDecode(cookies.token);
@@ -147,11 +152,40 @@ export default function Header({ role, rolename }) {
         </ul>
       </nav>
       <div className="headerBtn">
-        {user ? (
+        {user && user.role === "FUNDRAISER" ? (
           <>
-            <p className="user-info">
-              {user.name} - {user.role}
-            </p>
+            <div class="profileimg">
+              <button type="button" onClick={toggle} class="profilebutton">
+                <img
+                  src={`https://allowing-shiner-needlessly.ngrok-free.app/fundRaiser/fundraiser-page/${FundraiserContext.fundraiser_image}`}
+                  width="40"
+                  height="40"
+                />
+                {!isopen ? (
+                  <div class="custom-dropdown">
+                    <div class="selected-option">
+                      <i class="fa-solid fa-angle-up fa-rotate-180"></i>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div class="custom-dropdown">
+                      <div class="selected-option">
+                        <i class="fa-solid fa-angle-down"></i>
+                      </div>
+                    </div>
+                    <ul class="dropdown-options">
+                      <li data-value="option1">Dashboard</li>
+                      <li data-value="option2">View Profile</li>
+                      <li data-value="option3" style={{ color: "red" }}>
+                        Log out
+                        <img src="img/Vector.svg" height="18px" />
+                      </li>
+                    </ul>
+                  </>
+                )}
+              </button>
+            </div>
             <Button className="innerBtn" onClick={handleLogout}>
               Logout
             </Button>

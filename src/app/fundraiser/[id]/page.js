@@ -4,6 +4,7 @@ import axios from "axios";
 import "../../../component/module.fundraiser.css";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 // import Dashboard from "../(fundraiserAdmin)/(components)/dashboard/page";
 
 export default function page({ params }) {
@@ -119,11 +120,13 @@ export default function page({ params }) {
         ) : (
           //images
           <div className="leftAside">
-            {fundraiser.fundraiser_page?.gallery?.map((image, index) => (
+            {fundraiser?.gallery?.map((image, index) => (
               <div key={index} className="galleryImage">
-                <img
-                  src={`${image}`}
-                  alt={`Image ${index}`}
+                <h1>{image}</h1>
+               
+                <Image
+                  src={`https://allowing-shiner-needlessly.ngrok-free.app/fundRaiser/fundraiser-page/${image}`}
+                  alt={`Image ${image}`}
                   className="galleryImg"
                   height="200"
                   width="200"

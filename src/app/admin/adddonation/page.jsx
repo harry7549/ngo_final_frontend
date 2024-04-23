@@ -79,6 +79,9 @@ export default function page() {
     if (!formData.donation_date) {
       newErrors.paymentDate = "Donation Date is required";
     }
+    if (!formData.donor_paymentType) {
+      newErrors.donor_paymentType = "Donation Date is required";
+    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -105,7 +108,6 @@ export default function page() {
         console.log("API response:", response.data);
         alert("done");
       }
-      // Reset form after successful submission if needed
 
       setErrors({});
     } catch (error) {
@@ -136,7 +138,7 @@ export default function page() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter your fundraiser e-mail"
-                  />
+                  />{" "}
                 </span>
                 <span>
                   <span>
@@ -146,12 +148,18 @@ export default function page() {
                   <input
                     type="number"
                     name="amount"
+                    min={1}
                     value={formData.amount}
                     onChange={handleChange}
                     id="donor_phone"
                     placeholder="Enter your amount"
                     required
                   />
+                  {errors.amount && (
+                    <p style={{ color: "red", marginTop: "5px" }}>
+                      {errors.amount}
+                    </p>
+                  )}
                 </span>
               </div>
               <h2>Personal Information</h2>
@@ -171,6 +179,11 @@ export default function page() {
                       placeholder="Enter your first name"
                       required
                     />
+                    {errors.firstName && (
+                      <p style={{ color: "red", marginTop: "5px" }}>
+                        {errors.firstName}
+                      </p>
+                    )}
                   </span>
                   <span>
                     <span>Last Name</span>
@@ -198,6 +211,11 @@ export default function page() {
                       placeholder="Enter your e-mail"
                       required
                     />
+                    {errors.donor_email && (
+                      <p style={{ color: "red", marginTop: "5px" }}>
+                        {errors.donor_email}
+                      </p>
+                    )}
                   </span>
                 </div>
                 <div className="secondpersonalDetail">
@@ -279,6 +297,11 @@ export default function page() {
                       pattern="[1-9]{1}[0-9]{9}"
                       required
                     />
+                    {errors.donor_phone && (
+                      <p style={{ color: "red", marginTop: "5px" }}>
+                        {errors.donor_phone}
+                      </p>
+                    )}
                   </span>
                 </div>
               </div>
@@ -312,12 +335,13 @@ export default function page() {
                       placeholder="Choose your payment method"
                       required
                     />
+                    {errors.donor_paymentType && (
+                      <p style={{ color: "red", marginTop: "5px" }}>
+                        {errors.donor_paymentType}
+                      </p>
+                    )}
                   </span>
                   <span>
-                    <span>
-                      Reference Number <span className="compulsory">*</span>
-                    </span>
-                    <br />
                     <input
                       type="text"
                       name="refrence_payment"
@@ -325,7 +349,6 @@ export default function page() {
                       onChange={handleChange}
                       id="refrence_payment"
                       placeholder="Enter your Reference Number"
-                      required
                     />
                   </span>
                 </div>
@@ -345,6 +368,11 @@ export default function page() {
                       placeholder="Enter your Cheque/DD/NEFT date"
                       required
                     />
+                    {errors.donation_date && (
+                      <p style={{ color: "red", marginTop: "5px" }}>
+                        {errors.donation_date}
+                      </p>
+                    )}
                   </span>
                   <span>
                     <span>Bank Name</span>

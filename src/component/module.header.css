@@ -142,6 +142,9 @@
   color: #020257;
   background-color: #f1f1f1;
 }
+.downIcon {
+  margin-left: 5px;
+}
 .head .headerBtn {
   display: flex;
   justify-content: center;
@@ -178,6 +181,73 @@
   font-size: 25px;
   display: none;
 }
+
+/* profile */
+
+.profileimg img {
+  border: 2px solid #252988;
+  border-radius: 100%;
+  display: flex;
+}
+.profilebutton {
+  border: none;
+  background-color: #ffffff;
+  display: flex;
+  outline: none;
+}
+.profilebutton i {
+  display: flex;
+  padding-right: 5px;
+  margin-top: 10px;
+  font-size: 24px;
+}
+.profileimg .custom-dropdown {
+  position: relative;
+  font-family: Arial, sans-serif;
+  border: none;
+  z-index: 1;
+}
+
+.profileimg .selected-option {
+  cursor: pointer;
+  margin-left: 4px;
+  margin-top: 14px;
+  margin-right: 75px;
+}
+.profileimg .dropdown-options {
+  min-width: 91px;
+  list-style: none;
+  padding: 24px;
+  position: absolute;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 16px;
+  z-index: 1;
+  position: absolute;
+  align-content: center;
+  transform: translate3d(-44px, 60px, 0px);
+  display: block;
+}
+.dropdown-options i {
+  display: inline-block;
+}
+.profileimg .dropdown-options li {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  min-width: 108px;
+  border-radius: 16px;
+  font-size: 20px;
+}
+.dropdown-options img {
+  border: none;
+  min-width: 47px;
+}
+
+.profileimg .dropdown-options li:hover {
+  background-color: #f0f0f0;
+}
+
 .mainSection {
   display: flex;
   justify-content: center;

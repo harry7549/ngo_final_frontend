@@ -77,6 +77,7 @@ export default function Update() {
                   <br />
                   <input
                     type="number"
+                    min="1"
                     value={target_amount}
                     name="FundraisingTarget"
                     id="FundraisingTarget"
