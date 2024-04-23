@@ -59,13 +59,14 @@ const LoginPage = () => {
       };
       const { data } = await axios.post(
         //processENV
-        "https://allowing-shiner-needlessly.ngrok-free.app/auth/login",
+        // "https://allowing-shiner-needlessly.ngrok-free.app
+        "http://localhost:3003/auth/login",
         { email, password },
         config
       );
-      if (data === 401) {
+      if (!data || !data.token || errors.response.status == 401) {
         setErrors({
-          LOGIN: "email or password error",
+          loginError: "email or password incorrect",
         });
       } else {
         setCookie("token", data.token);
@@ -228,7 +229,7 @@ const LoginPage = () => {
                   </div>
                 </div>
                 <div>
-                  {errors.LOGIN && (
+                  {errors.loginError && (
                     <p
                       style={{
                         color: "red",
@@ -236,7 +237,7 @@ const LoginPage = () => {
                         marginBottom: "6px",
                       }}
                     >
-                      {errors.LOGIN}
+                      {errors.loginError}
                     </p>
                   )}
                 </div>

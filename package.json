@@ -11,6 +11,7 @@
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
     "@nextui-org/react": "^2.2.10",
+    "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -22,6 +23,7 @@
     "next": "14.1.4",
     "next-share": "^0.27.0",
     "ng-circle-progress": "^1.7.1",
+    "postcss-reporter": "^7.1.0",
     "prop-types": "^15.8.1",
     "react": "^18",
     "react-circular-progressbar": "^2.1.0",

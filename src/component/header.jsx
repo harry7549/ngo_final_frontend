@@ -175,20 +175,39 @@ export default function Header({ role, rolename }) {
                       </div>
                     </div>
                     <ul className="dropdown-options">
-                      <li data-value="option1">Dashboard</li>
-                      <li data-value="option2">View Profile</li>
+                      <li data-value="option1">
+                        {" "}
+                        <a
+                          href="/logout"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          Dashboard
+                        </a>
+                      </li>
+                      <li data-value="option2">
+                        {" "}
+                        <a
+                          href="/logout"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          Profile
+                        </a>
+                      </li>
                       <li data-value="option3" style={{ color: "red" }}>
-                        Log out
-                        <img src="img/Vector.svg" height="18px" />
+                        <a
+                          onClick={handleLogout}
+                          // href="/logout"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          Log out
+                        </a>
+                        {/* <img src="img/Vector.svg" height="18px" /> */}
                       </li>
                     </ul>
                   </>
                 )}
               </button>
             </div>
-            <Button className="innerBtn" onClick={handleLogout}>
-              Logout
-            </Button>
           </>
         ) : (
           <>
