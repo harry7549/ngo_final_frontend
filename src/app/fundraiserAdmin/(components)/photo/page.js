@@ -2,6 +2,7 @@
 import { useState, useContext } from "react";
 import AsideBar, { TopHeader } from "@/component/fundraiser/sidebar";
 import "./photo.css";
+import { FundraiserContext } from "@/context/FundraiserContext";
 
 export default function page() {
   const fundraiserCtx = useContext(FundraiserContext); // Assuming FundraiserContext is already imported and set up
@@ -34,7 +35,7 @@ export default function page() {
           <div className="imgwrapper">
             <div className="imgcount">
               <p>
-                Photos ({fundraiserCtx.image.length + images.length})
+                Photos ({fundraiserCtx.image?.length + images.length})
                 <a href="#">
                   <button onClick={thisFileUpload} className="ctaBtn">
                     <input
@@ -52,7 +53,7 @@ export default function page() {
               </p>
             </div>
             <div className="row">
-              {fundraiserCtx.image.map((img, index) => (
+              {fundraiserCtx.image?.map((img, index) => (
                 <div className="col" key={index}>
                   <button type="button" className="delete">
                     <i className="fa-solid fa-trash"></i>

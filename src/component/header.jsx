@@ -27,7 +27,7 @@ export default function Header({ role, rolename }) {
 
   const handleLogout = () => {
     removeCookie("token");
-    router.push("/login");
+    router.replace("/login");
   };
 
   return (

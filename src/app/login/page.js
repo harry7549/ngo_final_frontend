@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Header from "@/component/header";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 const LoginPage = () => {

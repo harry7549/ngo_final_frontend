@@ -6,6 +6,8 @@
 section {
   width: 100%;
   display: flex;
+  height: auto;
+  margin-bottom: 20px;
 }
 .leftSection {
   width: 20%;

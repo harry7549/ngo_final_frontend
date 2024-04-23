@@ -8,7 +8,7 @@ section {
 }
 .leftSection {
   width: 20%;
-  height: 660px;
+  height: auto;
 }
 .tab {
   display: flex;
@@ -100,7 +100,7 @@ th {
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: rgb(66, 221, 66);
 }
 
 input:focus + .slider {

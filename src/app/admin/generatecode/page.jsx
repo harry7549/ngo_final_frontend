@@ -1,31 +1,30 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; // Changed from "next/navigation" to "next/router"
 import useAuth from "@/context/auth";
+import axios from "axios"; // Added axios import
 import Sidebar from "../../../component/sidebar";
 import { Cookies } from "react-cookie";
 import "./generatecode.css";
 import Link from "next/link";
+
 const GeneratePage = () => {
   const cookies = new Cookies();
   const router = useRouter();
   const { user } = useAuth(["ADMIN"]);
+
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [token, settoken] = useState();
+  const [firstName, setFirstName] = useState("");
+  const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [mobile_number, setMobileNumber] = useState(""); // Changed from setmobile_number to setMobileNumber
+
   useEffect(() => {
     const data = cookies.get("token");
-    settoken(data || ""); // Set token to an empty string if data is undefined
+    setToken(data || ""); // Set token to an empty string if data is undefined
+    cookies.set("token", data || "", { path: "/" }); // Set the token in cookies
   }, []);
-  console.log(token);
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,16 +32,32 @@ const GeneratePage = () => {
     setError(null);
 
     try {
-      const response = await fetch(
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.post(
         "https://allowing-shiner-needlessly.ngrok-free.app/admin/generate",
         {
-          method: "POST",
-          config,
-          body: JSON.stringify({ email, name }),
-        }
+          email,
+          firstName,
+          mobile_number, // Changed from mobile_number to mobile_number
+        },
+        config
       );
 
-      if (!response.ok) {
+      if (response.status == 201) {
+        console.log("success", config);
+        await axios.post(
+          "https://allowing-shiner-needlessly.ngrok-free.app/admin/createPage",
+          { email },
+          config
+        );
+      }
+      if (response.status !== 200) {
+        // Changed from !response.ok to response.status !== 200
         throw new Error("Failed to generate.");
       }
 
@@ -53,6 +68,12 @@ const GeneratePage = () => {
       setLoading(false);
     }
   };
+  const reset = () => {
+    setEmail("");
+    setFirstName("");
+    setMobileNumber("");
+    setError(null);
+  };
 
   return (
     <section>
@@ -61,7 +82,7 @@ const GeneratePage = () => {
         <div className="rightsubSection">
           <h1>Generate Credentials</h1>
           <div className="rightsectionForm">
-            <form>
+            <form onSubmit={handleSubmit}>
               <span>
                 <span>E-mail </span>
                 <span className="compulsory">*</span>
@@ -70,6 +91,8 @@ const GeneratePage = () => {
                   type="email"
                   name="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your e-mail"
                 />
               </span>
@@ -79,8 +102,10 @@ const GeneratePage = () => {
                 <br />
                 <input
                   type="text"
+                  value={firstName}
                   name="fullName"
                   id="fullName"
+                  onChange={(e) => setFirstName(e.target.value)}
                   placeholder="Enter your full name"
                 />
               </span>
@@ -89,27 +114,29 @@ const GeneratePage = () => {
                 <span className="compulsory">*</span>
                 <br />
                 <input
-                  type="number"
+                  type="text"
                   name="mobileNumber"
                   id="mobileNumber"
+                  value={mobile_number} // Changed from mobile_number to mobile_number
+                  onChange={(e) => setMobileNumber(e.target.value)} // Changed from setmobile_number to setMobileNumber
                   placeholder="Enter your mobile no."
                   pattern="[0-9]{10}"
                   maxLength="10"
                 />
               </span>
+              <div className="rightsectionBtn">
+                <button
+                  type="reset"
+                  onClick={reset}
+                  className="cancelBtn filled"
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="cancelBtn">
+                  Generate
+                </button>
+              </div>
             </form>
-          </div>
-          <div className="rightsectionBtn">
-            <Link href="#">
-              <button type="reset" className="cancelBtn filled">
-                Cancel
-              </button>
-            </Link>
-            <Link href="#">
-              <button type="submit" className="cancelBtn">
-                Generate
-              </button>
-            </Link>
           </div>
         </div>
       </div>

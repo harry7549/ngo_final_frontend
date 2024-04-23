@@ -13,7 +13,6 @@ const useAuth = (allowedRoles) => {
 
     if (!token) {
       router.replace("/login");
-      
       return;
     }
 

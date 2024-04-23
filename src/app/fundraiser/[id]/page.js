@@ -18,8 +18,15 @@ export default function page({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "true",
+          },
+        };
         const response = await axios.get(
-          `https://allowing-shiner-needlessly.ngrok-free.app/fundraiser-page/${fundraiserID}`
+          `https://allowing-shiner-needlessly.ngrok-free.app/fundraiser-page/${fundraiserID}`,
+          config
         );
         setFundraiser(response.data); // Set the response data to the state
         console.log(response); // Set the response data to the state
@@ -112,11 +119,17 @@ export default function page({ params }) {
         ) : (
           //images
           <div className="leftAside">
-            {fundraiser.map()}
-            <img
-              style={{ height: "200px", width: "200px" }}
-              src="crawler.drawiofa39749d-f4de-4770-95f5-8aa6f737b3b0.png"
-            />
+            {fundraiser.fundraiser_page?.gallery?.map((image, index) => (
+              <div key={index} className="galleryImage">
+                <img
+                  src={`${image}`}
+                  alt={`Image ${index}`}
+                  className="galleryImg"
+                  height="200"
+                  width="200"
+                />
+              </div>
+            ))}
           </div>
         )}
         <div className="rightAside">
