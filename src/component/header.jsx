@@ -154,27 +154,27 @@ export default function Header({ role, rolename }) {
       <div className="headerBtn">
         {user && user.role === "FUNDRAISER" ? (
           <>
-            <div class="profileimg">
-              <button type="button" onClick={toggle} class="profilebutton">
+            <div className="profileimg">
+              <button type="button" onClick={toggle} className="profilebutton">
                 <img
                   src={`https://allowing-shiner-needlessly.ngrok-free.app/fundRaiser/fundraiser-page/${FundraiserContext.fundraiser_image}`}
                   width="40"
                   height="40"
                 />
                 {!isopen ? (
-                  <div class="custom-dropdown">
-                    <div class="selected-option">
-                      <i class="fa-solid fa-angle-up fa-rotate-180"></i>
+                  <div className="custom-dropdown">
+                    <div className="selected-option">
+                      <i className="fa-solid fa-angle-up fa-rotate-180"></i>
                     </div>
                   </div>
                 ) : (
                   <>
-                    <div class="custom-dropdown">
-                      <div class="selected-option">
-                        <i class="fa-solid fa-angle-down"></i>
+                    <div className="custom-dropdown">
+                      <div className="selected-option">
+                        <i className="fa-solid fa-angle-down"></i>
                       </div>
                     </div>
-                    <ul class="dropdown-options">
+                    <ul className="dropdown-options">
                       <li data-value="option1">Dashboard</li>
                       <li data-value="option2">View Profile</li>
                       <li data-value="option3" style={{ color: "red" }}>
